@@ -26,6 +26,10 @@ public class PlayerLife : MonoBehaviour
         {
             Die();
         }
+        else if (collision.gameObject.CompareTag("Saw"))
+        {
+            Die();
+        }
     }
     private void Die()
     {
