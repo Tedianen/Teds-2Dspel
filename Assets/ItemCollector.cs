@@ -16,9 +16,15 @@ public class ItemCollector : MonoBehaviour
             points++;
             Debug.Log(points);
             Destroy(collision.gameObject);
-            bananText.text = "Fruits: " + points;
+            bananText.text = "Points: " + points;
         }
-     
+     else if (collision.gameObject.CompareTag("Melon"))
+        {
+            points+=2;
+            Debug.Log(points);
+            Destroy(collision.gameObject);
+            bananText.text = "Points: " + points;
+        }
     }
 
 }
