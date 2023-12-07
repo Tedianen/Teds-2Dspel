@@ -24,6 +24,7 @@ public class PointRespawn : MonoBehaviour
             anim.SetTrigger("NewRespawnPoint");
             Respawning.Play();
             NewRespawnPoint = true;
+
          
         }
     }
