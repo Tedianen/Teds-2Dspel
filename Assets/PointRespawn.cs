@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,5 +34,33 @@ public class PointRespawn : MonoBehaviour
     void Update()
     {
         
+    }
+}*/
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class TheEndOfAllEnds : MonoBehaviour
+{
+    private Animator anim;
+    private AudioSource finishSound;
+    private bool TheEnd = false;
+
+    void Start()
+    {
+        finishSound = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Player" && TheEnd != true)
+        {
+            anim.SetTrigger("Theend");
+            finishSound.Play();
+            TheEnd = true;
+
+        }
     }
 }

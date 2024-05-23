@@ -6,12 +6,15 @@ using UnityEngine.UIElements;
 
 public class Movement : MonoBehaviour
 {
+    private float horizontal;
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sprite;
     private float dirX;
+/*    private bool IsWallSliding;
+    private float WallSlidingSpeed = 2f;*/
 
-    private enum MovementState {idle,running,jumping,falling,dubble_jumping,wall_jumping}
+    private enum MovementState {idle,running,jumping,falling,dubble_jumping/*,wall_jumping*/}
     private MovementState state = MovementState.idle;
 
     [SerializeField] private int jumpForce = 5;
@@ -19,6 +22,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] private int extraJumps = 1;
     [SerializeField] private int maxJumps = 1;
+    /*[SerializeField] private Transform wallCheck;
+    [SerializeField] private LayerMask wallLayer;*/
     
     private BoxCollider2D boxCol;
 
@@ -29,16 +34,19 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb= GetComponent <Rigidbody2D>();
+        rb = GetComponent <Rigidbody2D>();
 
         boxCol = GetComponent<BoxCollider2D>();
-        anim= GetComponent <Animator>();
+        anim = GetComponent <Animator>();
         sprite = GetComponent <SpriteRenderer>();
     }
+
 
     // Update is called once per frame
     void Update()
     {
+        /*horizontal = Input.GetAxisRaw("Horizontal");*/
+
 
         dirX = Input.GetAxisRaw("Horizontal");
         UpdateAnimationState();
@@ -51,14 +59,19 @@ public class Movement : MonoBehaviour
         else if(Input.GetButtonDown("Jump") && extraJumps > 0)
         {
             extraJumps--;
-            Debug.Log("hej");
             DoubleJump();
         }
         if (isGrounded())
         {
             extraJumps = maxJumps;
         }
+       /* if (IsWalled())
+        {
+            extraJumps = maxJumps;
+        }
 
+        WallSlide();*/
+        
     }
 
     private void Jump()
@@ -72,6 +85,24 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
+    /*private bool IsWalled()
+    {
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+    }
+    private void WallSlide()
+    {
+        Debug.Log(IsWalled());
+        if (IsWalled() && !isGrounded() && horizontal != 0f)
+        {
+            IsWallSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -WallSlidingSpeed, float.MaxValue));
+        }
+        else 
+        { 
+            IsWallSliding = false; 
+        }
+    }
+*/
 
     private void UpdateAnimationState()
     {

@@ -9,6 +9,10 @@ TagManager:
   - Spikes
   - Saw
   - Melon
+  - Falldamage
+  - RespawnPoint
+  - Trampo
+  - CannonBall
   layers:
   - Default
   - TransparentFX
@@ -17,7 +21,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - Wall
   - 
   - 
   - 
